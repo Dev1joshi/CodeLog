@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeLog - Track Your Coding Journey</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="authSection" class="auth-container">
+    <h1 id="authTitle">Login to CodeLog</h1>
+
+    <!-- Name input for signup (only shown in JS when signing up) -->
+    <div id="nameInputGroup" style="display: none;">
+      <input type="text" id="authName" placeholder="Full Name" />
+    </div>
+
+    <input type="text" id="authUsername" placeholder="Username" />
+    <input type="password" id="authPassword" placeholder="Password" />
+    <button id="authActionBtn">Login</button>
+    <div class="error-msg" id="authError"></div>
+    <div class="toggle-auth" id="toggleAuth">Don't have an account? Sign up</div>
+  </div>
+
+  <div id="appSection" style="display: none">
+    <header>
+      <h1>CodeLog</h1>
+      <p id="welcomeText">Welcome!</p>
+      <button onclick="logout()">Logout</button>
+    </header>
+
+    <main>
+      <section>
+        <h2>📓 Today's Progress</h2>
+        <textarea id="dailyLog" placeholder="What did you work on today?"></textarea>
+        <button id="saveLog">Save Log</button>
+      </section>
+
+      <section>
+        <h2>🧠 Smart AI Suggestion</h2>
+        <div id="aiSuggestionBox" class="profile-summary">Your personalized learning tip will appear here.</div>
+      </section>
+
+      <section>
+        <h2>💡 Question Tracker</h2>
+        <select id="platformSelect">
+          <option>LeetCode</option>
+          <option>Codeforces</option>
+          <option>CodeChef</option>
+          <option>Other</option>
+        </select>
+
+        <select id="topicSelect">
+          <option>Array</option>
+          <option>String</option>
+          <option>Stack</option>
+          <option>Queue</option>
+          <option>Linked List</option>
+          <option>Binary Tree</option>
+          <option>BST</option>
+          <option>Graph</option>
+          <option>Greedy</option>
+          <option>DP</option>
+          <option>Recursion</option>
+          <option>Backtracking</option>
+          <option>Sliding Window</option>
+          <option>Heap</option>
+          <option>Trie</option>
+          <option>Hashing</option>
+          <option>Bit Manipulation</option>
+        </select>
+
+        <input type="text" id="questionNumber" placeholder="Enter question number" />
+        <button id="logQuestion">Log Question</button>
+        <button onclick="toggleScroll()">Toggle Solved Questions</button>
+
+        <div id="questionScrollBox" class="scroll-box"></div>
+      </section>
+
+      <section>
+        <h2>📊 Platform-wise Stats</h2>
+        <ul id="platformStats"></ul>
+        <canvas id="growthChart" width="400" height="200"></canvas>
+      </section>
+    </main>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

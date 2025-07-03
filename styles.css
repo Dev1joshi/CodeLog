@@ -1,0 +1,148 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  background: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+select, input[type="text"], input[type="password"], input[type="email"], input[type="name"], textarea, button {
+  padding: 10px;
+  margin: 10px 5px 0 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+.scroll-box {
+  max-height: 250px;
+  overflow-y: auto;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  display: none;
+}
+
+.log-item {
+  padding: 8px;
+  background: #e3f1e3;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.log-item button {
+  background-color: transparent;
+  color: red;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.profile-summary {
+  background-color: #e9ffe9;
+  border-left: 4px solid #4CAF50;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+}
+
+ul#platformStats {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul#platformStats li {
+  margin-bottom: 6px;
+  padding: 6px;
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+canvas {
+  margin-top: 30px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+.auth-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  padding: 20px;
+  text-align: center;
+}
+
+.auth-container input {
+  width: 250px;
+  margin: 10px 0;
+  padding: 12px;
+}
+
+.auth-container h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #4CAF50;
+}
+
+.auth-container .error-msg {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  height: 20px;
+}
+
+.auth-container .toggle-auth {
+  color: #2196F3;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  select, input[type="text"], input[type="password"], input[type="email"], input[type="name"], button, textarea {
+    width: 100%;
+  }
+}
