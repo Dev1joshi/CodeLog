@@ -1,7 +1,11 @@
 // Load Chart.js
 const script = document.createElement("script");
 script.src = "https://cdn.jsdelivr.net/npm/chart.js";
+script.onload = () => {
+  initChart();
+};
 document.head.appendChild(script);
+
 
 // === AUTH LOGIC ===
 let isLogin = true;
@@ -11,7 +15,6 @@ const authTitle = document.getElementById("authTitle");
 const toggleAuth = document.getElementById("toggleAuth");
 const authUsername = document.getElementById("authUsername");
 const authPassword = document.getElementById("authPassword");
-const authName = document.getElementById("authName");
 const authBtn = document.getElementById("authActionBtn");
 const authError = document.getElementById("authError");
 const welcomeText = document.getElementById("welcomeText");
@@ -29,10 +32,9 @@ function saveUsers(users) {
 authBtn.addEventListener("click", () => {
   const username = authUsername.value.trim();
   const password = authPassword.value;
-  const name = authName ? authName.value.trim() : "";
 
-  if (!username || !password || (!isLogin && !name)) {
-    authError.textContent = "Please fill all fields";
+  if (!username || !password) {
+    authError.textContent = "Please enter username and password";
     return;
   }
 
@@ -51,7 +53,7 @@ authBtn.addEventListener("click", () => {
     if (users[username]) {
       authError.textContent = "User already exists";
     } else {
-      users[username] = { password, name, logs: [], questions: [], suggestions: [] };
+      users[username] = { password, logs: [], questions: [], suggestions: [] };
       saveUsers(users);
       authError.textContent = "Account created. You can log in now.";
       toggleLogin();
@@ -66,15 +68,13 @@ function toggleLogin() {
   authTitle.textContent = isLogin ? "Login to CodeLog" : "Create Your CodeLog Account";
   authBtn.textContent = isLogin ? "Login" : "Sign Up";
   toggleAuth.textContent = isLogin ? "Don't have an account? Sign up" : "Already have an account? Login";
-  if (authName) authName.parentElement.style.display = isLogin ? "none" : "block";
   authError.textContent = "";
 }
 
 function loadDashboard() {
   authSection.style.display = "none";
   appSection.style.display = "block";
-  const users = loadUsers();
-  welcomeText.textContent = `Welcome, ${users[currentUser].name || currentUser}!`;
+  welcomeText.textContent = `Welcome, ${currentUser}!`;
   updatePlatformStats();
   updateQuestions();
   initChart();
@@ -195,18 +195,26 @@ function initChart() {
 function updateAISuggestions() {
   const aiBox = document.getElementById("aiSuggestionBox");
   const users = loadUsers();
-  const logs = users[currentUser].logs.map(l => l.text.toLowerCase());
+  const logs = users[currentUser].logs.map(l => l.text.toLowerCase()).join(" ");
   let suggestion = "Focus on consistent problem-solving each day.";
 
-  if (logs.some(l => l.includes("array"))) {
-    suggestion = "Try exploring String or Sliding Window problems next.";
-  } else if (logs.some(l => l.includes("linked list"))) {
-    suggestion = "How about tackling Stack and Queue based problems now?";
-  } else if (logs.some(l => l.includes("graph"))) {
-    suggestion = "You might want to learn Dynamic Programming or Trees next.";
-  } else if (logs.some(l => l.includes("dp"))) {
-    suggestion = "Great! Maybe now challenge yourself with advanced Graph problems.";
-  }
+  if (logs.includes("array")) suggestion = "Try exploring Strings or Sliding Window problems.";
+  else if (logs.includes("string")) suggestion = "Move to 2D Arrays or Recursion.";
+  else if (logs.includes("stack")) suggestion = "Try implementing Queues and Deques.";
+  else if (logs.includes("queue")) suggestion = "Explore Priority Queues and Heaps.";
+  else if (logs.includes("linked list")) suggestion = "How about practicing Doubly Linked Lists or detecting loops?";
+  else if (logs.includes("binary tree")) suggestion = "Great! Now try BSTs and Tree Traversals.";
+  else if (logs.includes("bst")) suggestion = "You can try Balanced Trees or AVL Trees.";
+  else if (logs.includes("graph")) suggestion = "Nice! Explore DFS, BFS or Union-Find algorithms.";
+  else if (logs.includes("dp")) suggestion = "You’re on fire! Try Hard DP and optimization problems.";
+  else if (logs.includes("recursion")) suggestion = "Try converting recursive solutions to iterative ones.";
+  else if (logs.includes("backtracking")) suggestion = "Explore advanced constraint-based problems like Sudoku.";
+  else if (logs.includes("sliding window")) suggestion = "Shift to Two Pointer or Greedy problems.";
+  else if (logs.includes("heap")) suggestion = "Now learn Dijkstra’s or Median in a Stream problems.";
+  else if (logs.includes("trie")) suggestion = "Try solving Word Search or Prefix problems now.";
+  else if (logs.includes("hash")) suggestion = "Next: Explore Collision handling and Hash Maps.";
+  else if (logs.includes("bit")) suggestion = "Try Subsets, XOR, and Bitwise operations problems.";
+  else if (logs.length > 0) suggestion = "Keep going! Maybe pick a new topic like Trees or DP.";
 
   aiBox.textContent = suggestion;
 }
